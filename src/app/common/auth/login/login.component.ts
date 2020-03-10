@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
     userName = '';
     password = '';
+    flagSignup = false;
 
     constructor(private router: Router, private authService: AuthService) {}
 
@@ -23,5 +24,19 @@ export class LoginComponent {
                 console.log('username/password incorrect');
             },
         );
+    }
+    toogleSignUp():void{
+        this.userName='';
+        this.password='';
+        this.flagSignup = !this.flagSignup;
+    }
+
+    signUp():void{
+        const payload={
+            userName:this.userName,
+            Pass: this.password
+        };
+
+        console.log(payload);
     }
 }

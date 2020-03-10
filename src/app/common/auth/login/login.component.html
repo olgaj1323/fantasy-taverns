@@ -1,4 +1,4 @@
-<h2>Login</h2>
+<h2>{{ flagSignup ? 'Sign up' : 'Login' }}</h2>
 <form>
   <div class="row">
     <div class="col-md-6">
@@ -12,8 +12,14 @@
   <br />
   <div class="row">
     <div class="col-md-6">
-      <button type="submit" class="btn btn-primary" (click)="login()">
+      <button *ngIf='!flagSignup' type="submit" class="btn btn-primary" (click)="login()">
         Submit
+      </button>
+      <button *ngIf='flagSignup' type="submit" class="btn btn-primary" (click)="signUp()">
+        Sign Up
+      </button>
+      <button type="submit" class="btn btn-info float-right" (click)="toogleSignUp()">
+        {{ flagSignup ? 'Cancel' : 'Sign up' }}
       </button>
     </div>
   </div>
