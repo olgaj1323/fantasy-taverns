@@ -162,3 +162,9 @@ const login = async function(req, res) {
 };
 
 module.exports.login = login;
+
+const testPost = async function(req, res){
+    return res.send('Posted!!');
+};
+
+module.exports.testPost = testPost;
