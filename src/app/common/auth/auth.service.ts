@@ -82,4 +82,9 @@ export class AuthService {
             this.cookieService.remove(tokenCookieKey);
         }
     }
+
+    signup(user:any):Observable<any>{
+        return this.http.post('http://localhost:3000/users',user);
+    }
+
 }

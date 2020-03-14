@@ -9,6 +9,13 @@ export class LoginComponent {
     userName = '';
     password = '';
     flagSignup = false;
+    selected:any ;
+    check:boolean;
+     Tavern = {
+        TavernName:'',
+        TaverId : 1
+      };
+    
 
     constructor(private router: Router, private authService: AuthService) {}
 
@@ -28,15 +35,32 @@ export class LoginComponent {
     toogleSignUp():void{
         this.userName='';
         this.password='';
+        this.check=false;
+        //this.selected=undefined;
         this.flagSignup = !this.flagSignup;
+
     }
 
     signUp():void{
+        console.log(this.selected);
         const payload={
-            userName:this.userName,
-            Pass: this.password
+            UserName:this.userName,
+            Password: this.password,
+            Tavern:{
+                Id:this.selected.Id,
+                TavernName:this.selected.Name
+            }
         };
 
         console.log(payload);
+        this.authService.signup(payload).subscribe((user)=>{
+            console.log(user);
+            this.router.navigateByUrl('/login');
+            //this.toogleSignUp();
+        },
+        (error) => {
+            console.log(error);
+        },
+        );
     }
 }

@@ -2,10 +2,29 @@
 <form>
   <div class="row">
     <div class="col-md-6">
-      <label>User Name</label>
-      <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
-      <label>Password</label>
-      <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+        <div class=" form-group form-check">
+            <input id="checkbox" class="form-check-input" type="checkbox"[(ngModel)]="check" name ="check">
+            <label for="checkbox" class="form-check-label">
+                Administrator
+            </label>
+        </div>
+        <div class="form-group">
+            <label>User Name</label>
+            <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
+              <label>Password</label>
+            <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+            <label for="ControlSelect">Tavern</label>
+            <select *ngIf="!check" [(ngModel)] ="selected" class="form-control" id="ControlSelect" name="selected"> 
+              <option [ngValue]="undefined" disabled>Select Any </option>
+              <option *ngFor="let tavern of Taverns" 
+              [ngValue]="tavern"> {{tavern.Name}} </option>
+            </select>
+            <input *ngIf="check" type="text" class="form-control" [(ngModel)]="Tavern.TavernName" name="TavernName" />
+
+
+        </div>
+      
+
     </div>
     <div class="col-md-6"></div>
   </div>
