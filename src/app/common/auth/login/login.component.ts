@@ -15,6 +15,18 @@ export class LoginComponent {
         TavernName:'',
         TaverId : 1
       };
+    Taverns=[{
+            Id:1,
+            Name:"John's Tavern"
+          },
+          {
+            Id:2,
+            Name:"Moe's Tavern"
+          },
+          {
+           Id:3,
+            Name:"Kate's Tavern"
+          }];
     
 
     constructor(private router: Router, private authService: AuthService) {}
