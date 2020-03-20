@@ -44,7 +44,7 @@ const createUser = async function(userInfo) {
         result = await pool
             .request()
             .input('UserName', sql.NVarChar, userInfo.UserName)
-            .input('TavernId', sql.Int, userInfo.Tavern.Id)
+            .input('TavernId', sql.Int, userInfo.Tavern.ID)
             .input('RoleId', sql.Int, roleId)
             .input('Password', sql.NVarChar, userInfo.Password)
             .query(

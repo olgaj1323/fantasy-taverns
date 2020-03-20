@@ -9,7 +9,9 @@ import { TavernsService } from '../../../tavern/taverns.service';
 export class LoginComponent implements OnInit {
     ngOnInit(): void {
         this.tavernService.getAll().subscribe((returnedTaverns) => {
-            console.log(returnedTaverns);
+            
+            this.Taverns=returnedTaverns;
+            console.log(this.Taverns[0].TavernName);
         });
     }
     userName = '';
@@ -18,23 +20,24 @@ export class LoginComponent implements OnInit {
     selected: any ;
     checkAdmin: boolean;
     checkManag: boolean;
+    Taverns=[];
 // tslint:disable-next-line: member-ordering
      Tavern = {
         TavernName: '',
         ID : 1
       };
-    Taverns = [{
-            ID: 1,
-            Name: "John's Tavern"
-          },
-          {
-            ID: 2,
-            Name: "Moe's Tavern"
-          },
-          {
-           ID: 3,
-            Name: 'Kate\'s Tavern'
-          }];
+    // Taverns = [{
+    //         ID: 1,
+    //         Name: "John's Tavern"
+    //       },
+    //       {
+    //         ID: 2,
+    //         Name: "Moe's Tavern"
+    //       },
+    //       {
+    //        ID: 3,
+    //         Name: 'Kate\'s Tavern'
+    //       }];
 
 
     constructor(private router: Router, private authService: AuthService, private tavernService: TavernsService) {}
@@ -65,7 +68,7 @@ export class LoginComponent implements OnInit {
     }
 
     signUp(): void {
-        console.log(this.selected);
+        console.log(this.selected.ID);
         const payload = {
             UserName: this.userName,
             Password: this.password,
@@ -75,11 +78,9 @@ export class LoginComponent implements OnInit {
             }
         };
 
-        console.log(payload);
         this.authService.signup(payload).subscribe((user) => {
-            console.log(user);
             this.router.navigateByUrl('/login');
-            // this.toogleSignUp();
+            this.toogleSignUp();
         },
         (error) => {
             console.log(error);

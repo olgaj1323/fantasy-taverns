@@ -28,7 +28,7 @@
             <select *ngIf="checkManag && !checkAdmin" [(ngModel)] ="selected" class="form-control" id="ControlSelect" name="selected"> 
               <option [ngValue]="undefined" disabled>Select Any </option>
               <option *ngFor="let tavern of Taverns" 
-              [ngValue]="tavern"> {{tavern.Name}} </option>
+              [ngValue]="tavern"> {{tavern.TavernName}} </option>
             </select>
             
             <input *ngIf="checkAdmin && !checkManag" type="text" class="form-control" [(ngModel)]="Tavern.TavernName" name="TavernName" />
