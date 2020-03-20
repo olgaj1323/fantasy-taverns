@@ -1,34 +1,41 @@
 <h2>{{ flagSignup ? 'Sign up' : 'Login' }}</h2>
+<br>
 <form>
-  <div class="row">
-    <div class="col-md-6">
-        <div class=" form-group form-check">
-            <input id="checkbox" class="form-check-input" type="checkbox"[(ngModel)]="check" name ="check">
-            <label for="checkbox" class="form-check-label">
-                Administrator
-            </label>
+    <div class="row"> 
+      <div class="form-check-inline">
+        <div class="col-md-8">
+          <input id="checkboxAdmin" class="form-check-input" type="checkbox"[(ngModel)]="checkAdmin" name ="checkAdmin">
+          <label for="checkAdmin" class="form-check-label"> Administrator</label>
         </div>
+        <div class="col-md-8">
+          <input id="checkboxManag" class="form-check-input" type="checkbox"[(ngModel)]="checkManag" name ="checkManag">
+          <label for="checkManag" class="form-check-label"> Manager </label>
+        </div>
+      </div>  
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
         <div class="form-group">
             <label>User Name</label>
             <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
-              <label>Password</label>
+            
+            <label>Password</label>
             <input type="password" class="form-control" [(ngModel)]="password" name="password" />
-            <label for="ControlSelect">Tavern</label>
-            <select *ngIf="!check" [(ngModel)] ="selected" class="form-control" id="ControlSelect" name="selected"> 
+            
+            <label *ngIf="checkManag || checkAdmin" for="ControlSelect">Tavern</label>
+            
+            <select *ngIf="checkManag && !checkAdmin" [(ngModel)] ="selected" class="form-control" id="ControlSelect" name="selected"> 
               <option [ngValue]="undefined" disabled>Select Any </option>
               <option *ngFor="let tavern of Taverns" 
               [ngValue]="tavern"> {{tavern.Name}} </option>
             </select>
-            <input *ngIf="check" type="text" class="form-control" [(ngModel)]="Tavern.TavernName" name="TavernName" />
-
-
+            
+            <input *ngIf="checkAdmin && !checkManag" type="text" class="form-control" [(ngModel)]="Tavern.TavernName" name="TavernName" />
         </div>
-      
-
+      </div>
     </div>
-    <div class="col-md-6"></div>
-  </div>
-  <br />
+ 
   <div class="row">
     <div class="col-md-6">
       <button *ngIf='!flagSignup' type="submit" class="btn btn-primary" (click)="login()">
@@ -42,4 +49,12 @@
       </button>
     </div>
   </div>
+
+
+
+
+
+
+
+
 </form>
