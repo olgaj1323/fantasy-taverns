@@ -10,11 +10,9 @@ const getAll = async function(req, res) {
     try {
         tavernPool = await pool
             .request()
-            .input('UserId', sql.Int, req.user.Id)
-            .input('Name', sql.VarChar, req.query.Search)
             .query(
                 // eslint-disable-next-line quotes
-                `select * from ToDos where UserId = @UserId and Name Like '%' + @Name + '%'`,
+                `select * from taverns`,
             );
         taverns = tavernPool.recordset;
     } catch (e) {

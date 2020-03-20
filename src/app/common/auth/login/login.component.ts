@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { TavernsService } from '../../../tavern/taverns.service';
 
 @Component({
     templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
     ngOnInit(): void {
-        
+        this.tavernService.getAll().subscribe((returnedTaverns) => {
+            console.log(returnedTaverns);
+        });
     }
     userName = '';
     password = '';
@@ -15,25 +18,26 @@ export class LoginComponent implements OnInit {
     selected: any ;
     checkAdmin: boolean;
     checkManag: boolean;
+// tslint:disable-next-line: member-ordering
      Tavern = {
         TavernName: '',
-        TaverId : 1
+        ID : 1
       };
     Taverns = [{
-            Id: 1,
+            ID: 1,
             Name: "John's Tavern"
           },
           {
-            Id: 2,
+            ID: 2,
             Name: "Moe's Tavern"
           },
           {
-           Id: 3,
-            Name:'Kate\'s Tavern'
+           ID: 3,
+            Name: 'Kate\'s Tavern'
           }];
 
 
-    constructor(private router: Router, private authService: AuthService) {}
+    constructor(private router: Router, private authService: AuthService, private tavernService: TavernsService) {}
 
     login(): void {
         this.authService.login(this.userName, this.password).subscribe(
@@ -66,7 +70,7 @@ export class LoginComponent implements OnInit {
             UserName: this.userName,
             Password: this.password,
             Tavern: {
-                Id: this.selected.Id,
+                ID: this.selected.ID,
                 TavernName: this.selected.Name
             }
         };

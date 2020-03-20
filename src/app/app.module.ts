@@ -12,11 +12,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './common/auth/login/login.component';
 import { TokenInterceptor } from './common/auth/token.interceptor';
 import { HomeComponent } from './home.component';
-import { TavernComponent } from './tavern/tavern.component';
+import { TavernModule } from './tavern/tavern.module';
 
 @NgModule({
     bootstrap: [AppComponent],
-    declarations: [AppComponent, LoginComponent, HomeComponent, TavernComponent],
+    declarations: [AppComponent, LoginComponent, HomeComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -25,6 +25,8 @@ import { TavernComponent } from './tavern/tavern.component';
         NgbModule,
         AppRoutingModule,
         CookieModule.forRoot(),
+        TavernModule,
+        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
