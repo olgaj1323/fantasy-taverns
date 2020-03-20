@@ -23,9 +23,10 @@ import { TavernModule } from './tavern/tavern.module';
         FormsModule,
         HttpClientModule,
         NgbModule,
+        TavernModule,
         AppRoutingModule,
         CookieModule.forRoot(),
-        TavernModule,
+        
         
     ],
     providers: [
