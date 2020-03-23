@@ -128,7 +128,7 @@ const authUser = async function(userInfo) {
     if (err) {
         throwError(err.message);
     }
-
+    console.log(user.TavernID);
     return user;
 };
 

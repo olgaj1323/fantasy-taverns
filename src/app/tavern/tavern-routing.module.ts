@@ -4,7 +4,7 @@ import { AuthGuard } from '../common/auth/auth.guard';
 import { TavernComponent } from './tavern/tavern.component';
 
 const tavernRoutes: Routes = [
-    { path: '/myTavern', component: TavernComponent, canActivate: [AuthGuard] },
+    { path: 'myTavern', component: TavernComponent, canActivate: [AuthGuard] },
     
 ];
 
@@ -12,4 +12,6 @@ const tavernRoutes: Routes = [
     exports: [RouterModule],
     imports: [RouterModule.forChild(tavernRoutes)],
 })
-export class ToDoRoutingModule {}
+export class TavernRoutingModule {
+    
+}

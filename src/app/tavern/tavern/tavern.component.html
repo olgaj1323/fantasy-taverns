@@ -1,11 +1,26 @@
-<h3>My Tavern</h3>
+<h2>Welcome to {{tavernName}}</h2>
+<br><br>
 
-<p>Welcome to my Tavern</p>
 
-<p>x Rooms availables</p>
-
-<ul>
-    <li>
-        Room 1
-    </li>
-</ul>
+<h5>We have {{roomsTavern.length}} Rooms availables</h5>
+<br>
+<div class="row">
+    <div class="col-md-8">
+        <div class="container">           
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Room</th>
+              <th>Daily Rate (US$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of roomsTavern">
+              <td>{{room.RoomName}}</td>
+              <td>{{room.DailyRate}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>

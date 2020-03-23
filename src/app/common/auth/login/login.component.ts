@@ -26,28 +26,14 @@ export class LoginComponent implements OnInit {
         TavernName: '',
         ID : 1
       };
-    // Taverns = [{
-    //         ID: 1,
-    //         Name: "John's Tavern"
-    //       },
-    //       {
-    //         ID: 2,
-    //         Name: "Moe's Tavern"
-    //       },
-    //       {
-    //        ID: 3,
-    //         Name: 'Kate\'s Tavern'
-    //       }];
-
-
     constructor(private router: Router, private authService: AuthService, private tavernService: TavernsService) {}
 
     login(): void {
         this.authService.login(this.userName, this.password).subscribe(
             (response) => {
                 if (response.success) {
-                    console.log('successful login');
-                    this.router.navigateByUrl('/home');
+                    console.log('successful login', response.user);
+                    this.router.navigateByUrl('/myTavern');
                 }
             },
             (error) => {
@@ -60,9 +46,6 @@ export class LoginComponent implements OnInit {
         this.password = '';
         this.checkAdmin = false;
         this.checkManag = false;
-        
-        
-        // this.selected=undefined;
         this.flagSignup = !this.flagSignup;
 
     }
