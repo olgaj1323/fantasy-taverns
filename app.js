@@ -71,11 +71,9 @@ app.post('/users', userController.create);
 //app.post('/users', userController.testPost);
 app.post('/login', userController.login);
 app.get('/taverns',TavernsController.getAll);
-app.get(
-    '/rooms',
-    passport.authenticate('jwt', { session: false }),
-    TavernsController.getRoom,
-);
+app.get('/tavern',passport.authenticate('jwt', { session: false }),TavernsController.getTavern);
+app.get('/rooms',passport.authenticate('jwt', { session: false }),TavernsController.getRoom,);
+app.post('/room',passport.authenticate('jwt', { session: false }),TavernsController.createRoom,);
 
 
 

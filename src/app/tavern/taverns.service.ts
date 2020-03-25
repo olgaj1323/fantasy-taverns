@@ -7,7 +7,7 @@ export interface ITavern {
     TavernName: string;
 }
 
-export interface IRoom{
+export interface IRoom {
     ID: number;
     RoomName: string;
     DailyRate: number;
@@ -19,14 +19,24 @@ export interface IRoom{
 export class TavernsService {
     constructor(private http: HttpClient) {}
 
-    
+    getTavernInfo():Observable<ITavern>{
+        return this.http.get<ITavern>(`http://localhost:3000/tavern`,
+        );
+     }
+    //get tavern inv the dropdown
     getAll(): Observable<ITavern[]> {
         return this.http.get<ITavern[]>(
             `http://localhost:3000/taverns`,
         );
     }
+    // get Rooms of a Tavern with Taver ID
 
-    getRoom(tavernID:number): Observable<IRoom[]>{
-        return this.http.get<IRoom[]>(`http://localhost:3000/rooms?tavernid=${tavernID}`)
+    getRoom(searchText:string): Observable<IRoom[]> {
+        return this.http.get<IRoom[]>(`http://localhost:3000/rooms?Search=${searchText}`);
+    }
+
+    // Add room to Tavern
+    saveRoom(newRoom: IRoom): Observable<IRoom> {
+        return this.http.post<IRoom>(`http://localhost:3000/room`, newRoom);
     }
 }
