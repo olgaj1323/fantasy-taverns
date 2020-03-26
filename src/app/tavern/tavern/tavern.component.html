@@ -6,7 +6,7 @@
             (keyup)="search($event)"  [(ngModel)]="searchText" placeholder="Enter text to Search..."/>
     </div>
     <div class="col-md-2">
-        <button class="btn btn-primary" routerLink="/myTavern/modifyRoom">
+        <button class="btn btn-primary" routerLink="/modifyRoom/Add">
             Add Room
         </button>
     </div>
@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let room of roomsTavern">
+            <tr *ngFor="let room of roomsTavern" [routerLink]="'/modifyRoom/'+room.ID">
               <td>{{room.RoomName}}</td>
               <td>{{room.DailyRate}}</td>
             </tr>

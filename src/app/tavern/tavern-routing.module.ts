@@ -6,7 +6,7 @@ import { ModifyRoomComponent } from './modify-room/modify-room.component';
 
 const tavernRoutes: Routes = [
     { path: 'myTavern', component: TavernComponent, canActivate: [AuthGuard] },
-    { path: 'myTavern/modifyRoom', component: ModifyRoomComponent, canActivate: [AuthGuard] },
+    { path: 'modifyRoom/:roomID', component: ModifyRoomComponent, canActivate: [AuthGuard] },
     
 ];
 

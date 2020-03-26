@@ -19,11 +19,11 @@ export interface IRoom {
 export class TavernsService {
     constructor(private http: HttpClient) {}
 
-    getTavernInfo():Observable<ITavern>{
+    getTavernInfo(): Observable<ITavern> {
         return this.http.get<ITavern>(`http://localhost:3000/tavern`,
         );
      }
-    //get tavern inv the dropdown
+    // get tavern inv the dropdown
     getAll(): Observable<ITavern[]> {
         return this.http.get<ITavern[]>(
             `http://localhost:3000/taverns`,
@@ -31,12 +31,23 @@ export class TavernsService {
     }
     // get Rooms of a Tavern with Taver ID
 
-    getRoom(searchText:string): Observable<IRoom[]> {
+    getRoom(searchText: string): Observable<IRoom[]> {
         return this.http.get<IRoom[]>(`http://localhost:3000/rooms?Search=${searchText}`);
+    }
+
+    getById(id: number): Observable<IRoom> {
+        return this.http.get<IRoom>(`http://localhost:3000/rooms/${id}`);
     }
 
     // Add room to Tavern
     saveRoom(newRoom: IRoom): Observable<IRoom> {
-        return this.http.post<IRoom>(`http://localhost:3000/room`, newRoom);
+        const isEdit = newRoom.ID > 0;
+        // edit room, Use put with Id
+        if (isEdit)  {
+            return this.http.put<IRoom>(`http://localhost:3000/room/${newRoom.ID}`, newRoom);
+        } else {
+            // new room, use post without ID
+            return this.http.post<IRoom>(`http://localhost:3000/room`, newRoom);
+        }
     }
 }

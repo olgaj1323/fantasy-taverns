@@ -1,16 +1,21 @@
-<h2>Add Room</h2><br>
+<h2>{{isNew ? 'Add' : 'Edit'}} Room</h2><br>
 
-<form #form="ngForm" (submit)=saveRoom(form)>
+<form [formGroup]="roomForm" (submit)=saveRoom($event)>
     <div class="row">
         <div class="col-md-6">
             <label for="roomName">Room Name</label>
-            <input type="text" class="form-control" name="roomName" ngModel #roomName="ngModel" required>
-            <div *ngIf="roomName.invalid && (roomName.dirty || roomName.touched)" class="alert alert-danger">
-                <div *ngIf="roomName.errors.required">Name is required</div>
+            <input type="text" class="form-control" formControlName="roomName" >
+            <div *ngIf="roomForm.controls.roomName.invalid && (roomForm.controls.roomName.dirty || roomForm.controls.roomName.touched)" class="alert alert-danger">
+                <div *ngIf="roomForm.controls.roomName.errors.required">Name is required</div>
+                <div *ngIf="roomForm.controls.roomName.errors.maxlength">Name can be max 10 characters long.</div>
             </div>
             <br>
             <label for="roomName">Daily Rate</label>
-            <input type="text" class="form-control" name="DailyRate" ngModel required>
+            <input type="text" class="form-control" formControlName="DailyRate" >
+            <div *ngIf="roomForm.controls.DailyRate.invalid && (roomForm.controls.DailyRate.dirty || roomForm.controls.DailyRate.touched)" class="alert alert-danger">
+                <div *ngIf="roomForm.controls.DailyRate.errors.required">Daily Rate is required</div>
+                
+            </div>
         </div>
     </div>
     <br>

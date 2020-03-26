@@ -73,8 +73,9 @@ app.post('/login', userController.login);
 app.get('/taverns',TavernsController.getAll);
 app.get('/tavern',passport.authenticate('jwt', { session: false }),TavernsController.getTavern);
 app.get('/rooms',passport.authenticate('jwt', { session: false }),TavernsController.getRoom,);
+app.get('/rooms/:roomID',passport.authenticate('jwt', { session: false }),TavernsController.getById,);
 app.post('/room',passport.authenticate('jwt', { session: false }),TavernsController.createRoom,);
-
+app.put('/room/:roomID',passport.authenticate('jwt', { session: false }),TavernsController.editRoom,);
 
 
 console.log('SERVER READY');

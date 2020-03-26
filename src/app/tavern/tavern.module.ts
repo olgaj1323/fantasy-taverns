@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { TavernComponent } from './tavern/tavern.component';
 import { TavernRoutingModule } from './tavern-routing.module';
 import { ModifyRoomComponent } from './modify-room/modify-room.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [TavernComponent, ModifyRoomComponent],
   imports: [
-    CommonModule, FormsModule ,TavernRoutingModule, ],
+    CommonModule, FormsModule , ReactiveFormsModule, TavernRoutingModule, ],
 })
 export class TavernModule {}

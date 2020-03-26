@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     password = '';
     flagSignup = false;
     selected: any ;
-    checkAdmin: boolean;
+    check='Manager';
     checkManag: boolean;
     Taverns=[];
 // tslint:disable-next-line: member-ordering
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     toogleSignUp(): void {
         this.userName = '';
         this.password = '';
-        this.checkAdmin = false;
+        this.check = 'Manager';
         this.checkManag = false;
         this.flagSignup = !this.flagSignup;
 

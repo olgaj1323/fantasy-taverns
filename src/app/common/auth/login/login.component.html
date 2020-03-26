@@ -4,11 +4,11 @@
     <div class="row"> 
       <div class="form-check-inline">
         <div class="col-md-8">
-          <input id="checkboxAdmin" class="form-check-input" type="checkbox"[(ngModel)]="checkAdmin" name ="checkAdmin">
+          <input id="Admin" class="form-check-input" type="radio" value="Admin" [(ngModel)]="check" name ="GroupButtons">
           <label for="checkAdmin" class="form-check-label"> Administrator</label>
         </div>
         <div class="col-md-8">
-          <input id="checkboxManag" class="form-check-input" type="checkbox"[(ngModel)]="checkManag" name ="checkManag">
+          <input id="Manag" class="form-check-input" type="radio" [(ngModel)]="check"  value="Manager" name ="GroupButtons" checked>
           <label for="checkManag" class="form-check-label"> Manager </label>
         </div>
       </div>  
@@ -23,15 +23,15 @@
             <label>Password</label>
             <input type="password" class="form-control" [(ngModel)]="password" name="password" />
             
-            <label *ngIf="checkManag || checkAdmin" for="ControlSelect">Tavern</label>
+            <label for="ControlSelect">Tavern</label>
             
-            <select *ngIf="checkManag && !checkAdmin" [(ngModel)] ="selected" class="form-control" id="ControlSelect" name="selected"> 
+            <select *ngIf="check=='Manager'" [(ngModel)] ="selected" class="form-control" id="ControlSelect" name="selected"> 
               <option [ngValue]="undefined" disabled>Select Any </option>
               <option *ngFor="let tavern of Taverns" 
               [ngValue]="tavern"> {{tavern.TavernName}} </option>
             </select>
             
-            <input *ngIf="checkAdmin && !checkManag" type="text" class="form-control" [(ngModel)]="Tavern.TavernName" name="TavernName" />
+            <input *ngIf="check=='Admin'" type="text" class="form-control" [(ngModel)]="Tavern.TavernName" name="TavernName" />
         </div>
       </div>
     </div>
