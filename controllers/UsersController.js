@@ -21,22 +21,27 @@ const hashPassword = async function(userInfo) {
 };
 
 const createUser = async function(userInfo) {
+    console.log(userInfo);
     const pool = await poolPromise;
     let result;
-    const roleId = parseInt(userInfo.Tavern.Id) === 0 ? 1 : 2;
-
-    if (parseInt(userInfo.Tavern.Id) === 0) {
+    
+    const roleId = parseInt(userInfo.Tavern.ID) === 0 ? 1 : 2;
+    
+    if (parseInt(userInfo.Tavern.ID) === 0) {
         try {
             tavernResult = await pool
                 .request()
                 .input('TavernName', sql.VarChar, userInfo.Tavern.TavernName)
                 .query(
-                    'INSERT INTO Taverns ([TavernName]) OUTPUT inserted.* values (@TavernName)',
+                    `INSERT INTO Taverns ([TavernName]) OUTPUT inserted.* values (@TavernName)`,
                 );
-            userInfo.Tavern.Id = tavernResult.recordset.shift().ID;
+                userInfo.Tavern.ID = tavernResult.recordset.shift().ID;
+                
         } catch (e) {
             throwError(e.message);
         }
+
+
     }
     userInfo.Password = await hashPassword(userInfo);
 
@@ -44,7 +49,7 @@ const createUser = async function(userInfo) {
         result = await pool
             .request()
             .input('UserName', sql.NVarChar, userInfo.UserName)
-            .input('TavernId', sql.Int, userInfo.Tavern.ID)
+            .input('TavernId', sql.Int,userInfo.Tavern.ID)
             .input('RoleId', sql.Int, roleId)
             .input('Password', sql.NVarChar, userInfo.Password)
             .query(

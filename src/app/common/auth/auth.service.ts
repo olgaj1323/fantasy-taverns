@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
+import { UserRoles } from '../user-roles';
 
 export interface IUser {
     Id: number;
     UserName: string;
     TavernId: string;
-    RoleId: number;
+    RoleID: number;
 }
 
 export interface ILoginResponse {
@@ -74,6 +75,11 @@ export class AuthService {
     }
 
     setUser(user: ICurrentlyLoggedInUser): void {
+        if(user){
+            const userObject = JSON.parse(String(user.user));
+        user.user = userObject;
+        }
+        
         this.currentUser.next(user);
         if (user) {
             const userAsJson = JSON.stringify(user);
@@ -83,8 +89,16 @@ export class AuthService {
         }
     }
 
-    signup(user:any):Observable<any>{
-        return this.http.post('http://localhost:3000/users',user);
+    signup(user: any): Observable<any>{
+        return this.http.post('http://localhost:3000/users', user);
+    }
+
+    isAdmin(): boolean{
+        const currentUser = this.currentUser.getValue();
+        console.log('currentUser',currentUser);
+        console.log('currentUser',currentUser.user);
+        console.log('currentUser',currentUser.user.RoleID);
+        return currentUser && currentUser.user && currentUser.user.RoleID === UserRoles.Owner ? true : false;
     }
 
 }

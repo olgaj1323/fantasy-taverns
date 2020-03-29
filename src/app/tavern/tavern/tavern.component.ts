@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TavernsService, IRoom } from '../taverns.service';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { AuthService } from '../../common/auth/auth.service';
 
 @Component({
   selector: 'app-tavern',
@@ -12,8 +13,9 @@ export class TavernComponent implements OnInit, OnDestroy {
   searchText = '';
   searchUpdated = new Subject<string>();
   subscription = new Subscription();
+  isAdmin = false;
 
-  constructor(private tavernservice: TavernsService) {
+  constructor(private tavernservice: TavernsService, private authService: AuthService) {
     this.subscription = this.searchUpdated
     .pipe(
       debounceTime(300),
@@ -22,8 +24,6 @@ export class TavernComponent implements OnInit, OnDestroy {
         this.searchRoom(searchValue);
     });
    }
-   
-
   tavernID: number;
   tavernName: string;
 
@@ -31,6 +31,17 @@ export class TavernComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  ngOnInit(): void {
+    this.tavernservice.getTavernInfo().subscribe((tavern)=>{
+        this.tavernID = tavern.ID;
+        this.tavernName = tavern.TavernName;
+    });
+    this.tavernservice.getRoom('').subscribe((rooms) => {
+    this.roomsTavern = rooms;
+    console.log('Rooms', this.roomsTavern.length);
+    });
+    this.isAdmin = this.authService.isAdmin();
+}
   search($event): void {
     this.searchUpdated.next($event.target.value);
   }
@@ -42,17 +53,6 @@ export class TavernComponent implements OnInit, OnDestroy {
     });
    }
 
-  ngOnInit(): void {
-      this.tavernservice.getTavernInfo().subscribe((tavern)=>{
-          this.tavernID = tavern.ID;
-          this.tavernName = tavern.TavernName;
-      });
-      this.tavernservice.getRoom('').subscribe((rooms) => {
-      this.roomsTavern = rooms;
-      console.log('Rooms', this.roomsTavern.length);
-      });
-
-
-  }
+  
 
 }

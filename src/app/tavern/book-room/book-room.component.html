@@ -1,0 +1,30 @@
+<h3>Book a Room</h3>
+<p>Please complete the form below.</p>
+
+<form [formGroup] = "BookStayForm" (submit)=saveBook($event)>
+<div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <select class="form-control"  formControlName="guestSelected"> 
+            <option [ngValue]="null" disabled>Select Guest</option>
+            <option *ngFor="let guest of Guests" 
+            [ngValue]="guest"> {{guest.GuestName}} </option>
+          </select>
+      </div>
+      <div>
+        <select class="form-control"  formControlName="roomSelected"> 
+          <option [ngValue]="null" disabled>Select Room</option>
+          <option *ngFor="let room of Rooms" 
+          [ngValue]="room"> {{room.RoomName}} </option>
+        </select>
+      </div>
+      <div>
+      <!-- <app-ngbd-datepicker-range></app-ngbd-datepicker-range>
+        -->
+      </div>
+    </div>
+ </div>
+
+
+</form>
+ 

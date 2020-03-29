@@ -16,7 +16,7 @@ import { TavernModule } from './tavern/tavern.module';
 
 @NgModule({
     bootstrap: [AppComponent],
-    declarations: [AppComponent, LoginComponent, HomeComponent],
+    declarations: [AppComponent, LoginComponent, HomeComponent, ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
