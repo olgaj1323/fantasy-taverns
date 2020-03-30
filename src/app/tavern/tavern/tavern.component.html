@@ -25,6 +25,7 @@
             <tr *ngFor="let room of roomsTavern" [routerLink]="'/modifyRoom/'+room.ID">
               <td>{{room.RoomName}}</td>
               <td>{{room.DailyRate}}</td>
+              <td><span><button class="btn btn-primary btn-sm" (click)="booking($event) ">Book</button></span></td>
             </tr>
           </tbody>
         </table>

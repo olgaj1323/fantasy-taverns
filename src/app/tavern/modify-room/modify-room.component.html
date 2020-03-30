@@ -1,6 +1,6 @@
 <h2>{{isNew ? 'Add' : 'Edit'}} Room</h2><br>
 
-<form [formGroup]="roomForm" (submit)=saveRoom($event)>
+<form [formGroup]="roomForm" (submit)=saveRoom($event) (cancel)=cancel($event)>
     <div class="row">
         <div class="col-md-6">
             <label for="roomName">Room Name</label>
@@ -19,5 +19,13 @@
         </div>
     </div>
     <br>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+        <div class="col-md-6">
+            <button type="cancel" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+    
 </form>

@@ -79,6 +79,7 @@ app.post('/room',passport.authenticate('jwt', { session: false }),TavernsControl
 app.put('/room/:roomID',passport.authenticate('jwt', { session: false }),TavernsController.editRoom,);
 app.get('/guests',passport.authenticate('jwt', { session: false }),RoomControllers.getGuests);
 app.get('/allRooms',passport.authenticate('jwt', { session: false }),RoomControllers.getAllRooms,);
+app.post('/bookRoom',passport.authenticate('jwt', { session: false }), RoomControllers.createRoomStay);
 
 
 console.log('SERVER READY');

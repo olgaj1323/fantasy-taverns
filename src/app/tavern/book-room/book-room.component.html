@@ -1,7 +1,7 @@
 <h3>Book a Room</h3>
 <p>Please complete the form below.</p>
 
-<form [formGroup] = "BookStayForm" (submit)=saveBook($event)>
+<form [formGroup] = "BookStayForm" (submit)=saveBook($event) (cancel)=cancel($event)>
 <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -16,11 +16,21 @@
           <option [ngValue]="null" disabled>Select Room</option>
           <option *ngFor="let room of Rooms" 
           [ngValue]="room"> {{room.RoomName}} </option>
-        </select>
+        </select><br><br>
       </div>
       <div>
-      <!-- <app-ngbd-datepicker-range></app-ngbd-datepicker-range>
-        -->
+      <app-ngbd-datepicker-range></app-ngbd-datepicker-range>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
+          <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
+          <button type="submit" class="btn btn-danger">Reset</button>
+      </div>
+      </div>
+
       </div>
     </div>
  </div>

@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { DatepickerService } from '../datepicker.service';
 
 @Component({
   selector: 'app-ngbd-datepicker-range',
@@ -16,31 +17,35 @@ import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
       background-color: #e6e6e6;
     }
     .custom-day.range, .custom-day:hover {
-      background-color: rgb(2, 117, 216);
+      background-color: rgb(85,83,83);
       color: white;
     }
     .custom-day.faded {
-      background-color: rgba(2, 117, 216, 0.5);
+      background-color: rgb(85,83,83, 0.7);
     }
   `]
 })
-export class NgbdDatepickerRangeComponent {
+export class NgbdDatepickerRangeComponent{
 
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate;
   toDate: NgbDate | null = null;
 
-  constructor(calendar: NgbCalendar) {
+  constructor(calendar: NgbCalendar, private data:DatepickerService) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     console.log('fromDate',this.fromDate);
     console.log('toDate',this.toDate);
 
 }
+message:string;
+
+
 
  
   onDateSelection(date: NgbDate) {
+
      console.log('Date',date);
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -51,6 +56,9 @@ export class NgbdDatepickerRangeComponent {
       this.toDate = null;
       this.fromDate = date;
     }
+    console.log('fromDate',this.fromDate);
+    console.log('toDate',this.toDate);
+    this.newMessage(this.fromDate,this.toDate);
   }
 
   isHovered(date: NgbDate) {
@@ -63,5 +71,13 @@ export class NgbdDatepickerRangeComponent {
 
   isRange(date: NgbDate) {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+
+  
+
+  newMessage(from:NgbDate,to:NgbDate) {
+    let dates=[from,to]  
+    this.data.changeMessage(dates);
   }
 }

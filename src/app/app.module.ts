@@ -13,6 +13,7 @@ import { LoginComponent } from './common/auth/login/login.component';
 import { TokenInterceptor } from './common/auth/token.interceptor';
 import { HomeComponent } from './home.component';
 import { TavernModule } from './tavern/tavern.module';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -30,7 +31,7 @@ import { TavernModule } from './tavern/tavern.module';
         
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },DatePipe,
     ],
 })
 export class AppModule {}

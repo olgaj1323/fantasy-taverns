@@ -66,7 +66,7 @@ module.exports.createUser = createUser;
 create = async function(req, res) {
     res.setHeader('ContentType', 'application/json');
     const body = req.body;
-
+    console.log('req when create user',req.body);
     if (!body.Password) {
         return returnError(res, 'Please enter a password to register', 422);
     }

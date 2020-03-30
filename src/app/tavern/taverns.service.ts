@@ -61,4 +61,8 @@ export class TavernsService {
             `http://localhost:3000/allRooms`,
         );
     }
+
+    bookingRoom(bookRoom: any): Observable<any>{
+        return this.http.post('http://localhost:3000/bookRoom', bookRoom);
+    }
 }

@@ -3,6 +3,7 @@ import { TavernsService, IRoom } from '../taverns.service';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { AuthService } from '../../common/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tavern',
@@ -15,7 +16,7 @@ export class TavernComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   isAdmin = false;
 
-  constructor(private tavernservice: TavernsService, private authService: AuthService) {
+  constructor(private tavernservice: TavernsService, private authService: AuthService, private router: Router) {
     this.subscription = this.searchUpdated
     .pipe(
       debounceTime(300),
@@ -52,6 +53,12 @@ export class TavernComponent implements OnInit, OnDestroy {
       this.roomsTavern = returnedRooms;
     });
    }
+   booking(event:MouseEvent):void{
+    console.log(event);
+    event.stopPropagation();
+    event.preventDefault();
+    this.router.navigateByUrl('/bookStay');
+  }
 
   
 

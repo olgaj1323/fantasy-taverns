@@ -61,4 +61,8 @@ export class ModifyRoomComponent implements OnInit {
       });
     }
   }
+
+  cancel(event):void{
+    this.router.navigateByUrl('/myTavern');
+  }
 }

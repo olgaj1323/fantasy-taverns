@@ -10,7 +10,6 @@ const tavernRoutes: Routes = [
     { path: 'myTavern', component: TavernComponent, canActivate: [AuthGuard] },
     { path: 'modifyRoom/:roomID', component: ModifyRoomComponent, canActivate: [AuthGuard] },
     { path: 'bookStay', component: BookRoomComponent, canActivate: [AuthGuard] },
-    { path: 'datepicker', component: NgbdDatepickerRangeComponent, canActivate: [AuthGuard] },
     
 ];
 
